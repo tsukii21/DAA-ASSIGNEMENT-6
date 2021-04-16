@@ -1,0 +1,261 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{float}
+\usepackage{lipsum}
+\usepackage{sectsty}
+\usepackage{tikz}
+\sectionfont{\centering}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+\usepackage[font=small]{caption}
+\addtolength{\abovecaptionskip}{-3mm}
+\addtolength{\textfloatsep}{-5mm}
+\setlength\columnsep{20pt}
+
+\usepackage[a4paper,left=1.50cm, right=1.50cm, top=2cm, bottom=3cm]{geometry}
+
+
+\author{}
+
+\title{\Large{Design and Analysis of Algorithms Assignment - 3}}
+\begin{document}
+	\begin{center}
+		{\Large \textbf{Single Shortest Distance Problem}}\\
+			\vspace{1em}
+		{\large Design and Analysis of Algorithms Assignment - 3 }\\
+		\vspace{1em}
+		{\large Department of Information Technology}\\
+		\vspace{1em}
+		\large{Indian Institute of Information Technology - Allahabad, India}\\
+		\vspace{1em}
+		\large{Jaidev Das \hspace{7em} Deeptarshi Biswas }\\
+		\large{IIT2019197 \hspace{10em} IIT2019195} 
+		
+		\vspace{2.5em}
+	\end{center}
+	
+\begin{multicols*}{2}
+
+    \textbf{\emph{{Abstract}:  This paper discusses the methods involved  in solving the shortest distance problem.  First we go over a brief introduction of the  algorithms used, namely Dijkstra and  
+Bellman Ford algorithms. Then we go  
+over the algorithms themselves. Finally,  there’s an analysis of time and space and  complexities of both algorithms and a  
+brief comparison ending with a  
+conclusion. }}\\
+	
+	\textbf{\emph{{Index Terms}:Arrays, XOR bitwise operator, Binary numbers, Dynamic programming\\
+	}}
+
+
+\section*{INTRODUCTION}
+
+\paragraph{Problem Statement}
+
+The shortest distance problem involves,  given a graph and a source vertex in the  graph, finding shortest paths from source  to all vertices in the given graph. 
+\paragraph{Dijkstra's algorithm}
+Dijkstra’s algorithm provides an efficient  solution to this problem. It is very similar  to Prim’s algorithm for minimum  
+spanning tree. Like Prim’s MST(minimum  spanning tree), we generate a SPT  
+(shortest path tree) with a given source as  root. We maintain two sets, one set  
+contains vertices included in the shortest  path tree, the other set includes vertices  not yet included in the shortest path tree.  At every step of the algorithm, we find a  
+vertex which is in the other set (set of not  yet included) and has a minimum distance  from the source. 
+Dijkstra’s algorithm is a Greedy algorithm  and time complexity is O(VLogV) (with  the use of Fibonacci heap) 
+
+\paragraph{Bellman Ford algorithm}
+An alternative algorithm to solve this  problem is Bellman Ford’s algorithm. .  While Dijkstra doesn’t work for Graphs  with negative weight edges, Bellman-Ford  works for such graphs. Bellman-Ford is  also simpler than Dijkstra and suits well  for distributed systems. But the time  complexity of Bellman-Ford is O(VE),  which is more than Dijkstra.
+
+\paragraph{Floyd-Warshall algorithm}
+The Floyd–Warshall algorithm (also known as Floyd's algorithm, the Roy–Warshall algorithm, the Roy–Floyd algorithm, or the WFI algorithm) is an algorithm for finding shortest paths in a directed weighted graph with positive or negative edge weights (but with no negative cycles). A single execution of the algorithm will find the lengths (summed weights) of shortest paths between all pairs of vertices. Although it does not return details of the paths themselves, it is possible to reconstruct the paths with simple modifications to the algorithm. Versions of the algorithm can also be used for finding the transitive closure of a relation R, or (in connection with the Schulze voting system) widest paths between all pairs of vertices in a weighted graph.
+
+\paragraph{Contents}
+This report further contains:
+\begin{itemize}
+\item 	Algorithm  Designs
+\item 	Algorithm  Analysis
+\item 	References
+\end{itemize}
+
+\newpage
+
+\section*{ALGORITHM DESIGN}
+
+\paragraph{Dijkstra's Algorithm (using adjacency matrix):}
+First we look at the Dijkstra's algorithm using adjacency matrix. This can be considered the naive approach as better algorithms with better efficiencies exist. Below, the algorithm is discussed.\\
+
+
+\begin{enumerate}
+    \item Create a set sptSet (shortest path tree set)  that keeps track of vertices included in  
+shortest path tree, i.e., whose minimum  distance from source is calculated and 
+finalized. Initially, this set is empty. 
+\item  Assign a distance value to all vertices in  the input graph. Initialize all distance  
+values as INFINITE. Assign distance  value as 0 for the source vertex so that it  is picked first. 
+\item While sptSet doesn’t include all vertices 
+\begin{itemize}
+  \item Pick a vertex u which is not  there in sptSet and has minimum  distance value.
+  \item Include u to sptSet. 
+  \item Update distance value of all  adjacent vertices of u. To update  the distance values, iterate  through all adjacent vertices. For  every    adjacent vertex v, if sum  of distance value of u (from  source) and weight of edge u-v,  is less than the distance value of  v, then update the distance value  of v. \\\\
+\end{itemize}
+
+
+\end{enumerate}
+
+\includegraphics[scale=0.35]{matrix}\\\\
+
+\columnbreak
+
+
+\paragraph{Dijkstra's Algorithm (using adjacency list):}
+
+Here, we go over the Dijkstra's algorithm, this time using adjacency list. This is a fairly efficient algorithm for solving the single shortest distance problem but it should be noted  that this algorithm does not work for negative weights in the graph. 
+\begin{enumerate}
+
+\item Create a Min Heap of size V where V is  the number of vertices in the given graph.  Every node of min heap contains vertex  number and distance value of the vertex. 
+
+
+\item	Initialize Min Heap with source vertex as  root (the distance value assigned to  source vertex is 0). The distance value  assigned to all other vertices is INF  (infinite). 
+
+
+\item While Min Heap is not empty, do  following 
+ \begin{itemize}
+     \item Extract the vertex with minimum  distance value node from Min  Heap. Let the extracted vertex be u.
+     \item For every adjacent vertex v of u, check if v is in Min Heap. If v is  in Min Heap and distance value  is more than weight of u-v plus  distance value of u, then update the distance value of v.\\\\
+
+
+ \end{itemize}
+
+
+\end{enumerate}
+
+\includegraphics[scale=0.35]{images/list.png}\\\\
+
+\paragraph{Bellman Ford's algorithm:}
+Now we take a look at Bellman Ford's algorithm. It's an efficient algorithm for solving the single shortest distance problem but less so than Dijkstra's algorithm. However, this algorithm works for negative weighted edges too  in the graph.
+
+\begin{enumerate}
+    \item  This step initializes distances from the source  to all vertices as infinite and distance to the  source itself as 0. Create an array dist[] of
+size V with all values as infinite except  
+dist[src] where src is source vertex. 
+\item This step calculates shortest distances. Do  following V-1 times where |V| is the number  of vertices in given graph.
+\begin{itemize}
+    \item Do following for each edge u-v 
+    \item If dist[v] > dist[u] + weight of edge  
+uv, then update dist[v] dist[v] =  
+dist[u] + weight of edge uv 
+\end{itemize}
+\item This step reports if there is a negative weight  cycle in graph. Do following for each edge u v 
+    \begin{itemize}
+        \item  If dist[v] > dist[u] + weight of edge  
+uv, then “Graph contains negative  
+weight cycle”.\\\\
+    \end{itemize}
+ 
+\end{enumerate}
+
+\includegraphics[scale=0.35]{images/ford.png}\\\\
+
+\paragraph{Floyd-Warshall's algorithm:}
+Now we take a look at Floyd-Warshall's all pair shortest distance method.
+
+\begin{enumerate}
+    \item We initialize the solution matrix same as  the input graph matrix as a first step.
+    \item Then we update the solution matrix by  considering all vertices as an  
+intermediate vertex. The idea is to one by  one pick all vertices and updates all  shortest paths which include the picked  vertex as an intermediate vertex in the  shortest path. 
+\item When we pick vertex number k as an  intermediate vertex, we already have  considered vertices {0, 1, 2, .. k-1} as  intermediate vertices.
+\item For every pair (i, j) of the source and  destination vertices respectively, there  are two possible cases.
+\begin{itemize}
+    \item k is not an intermediate vertex in  shortest path from i to j. We keep the value of dist[i][j] as it is.
+    \item k is an intermediate vertex in shortest path from i to j. We update the value of dist[i][j] as dist[i][k] + dist[k][j] if dist[i][j] > dist[i][k] + dist[k][j]. \\\\
+\end{itemize}
+
+\end{enumerate}
+\includegraphics[scale=0.5]{images/floyd.png}\\\\
+
+    
+
+	
+\section*{ALGORITHM ANALYSIS} 
+
+\paragraph{Comparison between Dijkstra's and Bellman Ford's algorithms: }
+With the help of a table and a following graph, we compare the two algorithms. At first glance, Dijkstra's algorithm comes out to be better but we also have to note that only Bellman Ford's algorithm supports negative weights.\\\\
+
+ \begin{tabular}{| p{4cm} | p{4cm} |} 
+ \hline
+ Dijkstra's algorithm & Bellman Ford's algorithm \\ [0.5ex] 
+ \hline\hline
+ Dijkstra’s Algorithm doesn’t work when there is negative weight edge. & Bellman Ford’s Algorithm works when there is negative weight edge,
+it also detects the negative  weight cycle.
+ \\ 
+ \hline
+ The result contains the vertices containing whole information about the network, not only the
+vertices they are connected to.
+ & The result contains the vertices which contains the information  about the other  vertices they are connected to. \\
+ \hline
+It can not be implemented easily in
+a distributed way.
+ & It can easily be implemented in a
+distributed way.
+ \\
+ \hline
+ It is less time consuming. The time complexity is O(E logV). & It is more time consuming than Dijkstra’s algorithm. Its time complexity is O(VE). \\
+ \hline
+Greedy approach is taken to implement the algorithm. & Dynamic Programming approach is taken to
+implement the algorithm.
+ \\ [1ex] 
+ \hline
+\end{tabular}
+
+\includegraphics[scale=0.39]{images/comparison.png}\\\\
+
+
+\paragraph{Dijkstra's algorithm (adjacency matrix ):} \\
+\textbf{Time complexity: } \(O(V^2)\)
+\textbf{Space complexity: } \(O(V+E)\)
+
+
+\paragraph{Dijkstra's algorithm (adjacency list ):} \\
+\textbf{Time complexity: } \(O(ElogV)\)
+\textbf{Space complexity: } \(O(V)\)
+
+\includegraphics[scale=0.39]{images/listgraph.png}\\\\
+
+
+\paragraph{Bellman Ford's algorithm:} \\
+\textbf{Time complexity: } \(O(VE)\)
+\textbf{Space complexity: } \(O(V)\)
+
+\includegraphics[scale=0.39]{images/fordgraph.png}\\\\
+
+
+\paragraph{Floyd-Warshall's:} \\
+\textbf{Time complexity: } \(O(V^3)\)
+\textbf{Space complexity: } \(O(V^2)\)
+
+
+
+\section*{REFERENCES}
+
+\begin{enumerate}
+\item	\url{https://livebook.manning.com/book/grokking-algorithms/chapter-7/1}
+\item	\url{https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm}
+\item	\url{https://cp-algorithms.com/graph/dijkstra.html#toc-tgt-2}
+\item	\url{https://cp-algorithms.com/graph/bellman_ford.html}
+\item	\url{https://cp-algorithms.com/graph/all-pair-shortest-path-floyd-warshall.html}
+
+\end{enumerate}
+
+
+\end{multicols*}
+\clearpage
+
+	
+\end{document}
