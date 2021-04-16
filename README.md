@@ -28,39 +28,48 @@ git clone https://github.com/tsukii21/DAA-ASSIGNMENT-5.git
 
 **Test case**
 
-Find max
+Find shortest path
 ```
 Test Case-1
 Input:
-8 23
-2 4 8 0 2 1 66 78
+4 4
+1 2 24
+1 4 20
+3 1 3
+4 3 12
+1
 Out:
-0
+0 24 3 15
 #--------------------------#
 Test Case-2
 Input:
-6 7
-2 4 8 0 2 1
+1
+5 6
+1 2 32
+1 4 45
+3 1 7
+4 3 17
+5 4 12
+5 3 11
+3
 Out:
-4
+7 39 0 17 11 
 #--------------------------#
-6 0
-0 0 0 0 0 0
-Out:
-8
 ```
 ---
 
 ### Theory
-Here we are using the principle of inclusion and exclusion to to generate the number of subsets  with xor k. We can derieve a linear recurrence as
-f(n,k)=f(n-1,k^a[n])(inclusion)+f(n-1,k)(exclusion).
-Thus our dp relation is dp[i][j]=dp[i-1][j^a[i]]+dp[i-1][j].
+Djikstra Algorithm : For a given source node in the graph, the algorithm finds the shortest path between that node and every other.[7]:196–206 It can also be used for finding the shortest paths from a single node to a single destination node by stopping the algorithm once the shortest path to the destination node has been determined. For example, if the nodes of the graph represent cities and edge path costs represent driving distances between pairs of cities connected by a direct road (for simplicity, ignore red lights, stop signs, toll roads and other obstructions).
 
+BFS(Undirected Graph): Uses greedy method and computes the distances level wise.
+ 
+Bellman Ford: Uses V-1 times travels every edge to make sure all vertices acquire their required minimum distance from source..This algorithm holds for negative weight in a graph
 ---
 
 ### Analysis
 
 **Time Complexity**
+**BFS(Directed/Undirected unweighted Graph)** : O(V+E)
 
 **Djikstra Method (Using adjacency matrix)** : O(V^2)
 
@@ -73,6 +82,7 @@ Thus our dp relation is dp[i][j]=dp[i-1][j^a[i]]+dp[i-1][j].
 ---
 
 **Space Complexity**
+**BFS(Directed/Undirected unweighted Graph)** : O(V+E)
 
 **Djikstra Method (Using adjacency matrix)** : O(V+E)
 
