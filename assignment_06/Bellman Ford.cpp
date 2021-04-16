@@ -1,6 +1,32 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+#include<vector>
+#include<map>
+#include<queue>
+#include<utility>
+#include<set>
+#define lli long long int
+#define maplli map<lli,lli>
+#define iterm maplli::iterator
+#define fi first
+#define si second
+#define For(i,a,b) for(lli i=a;i<b;i++)
+#define vec vector<lli>
+#define pb push_back
+#define mp make_pair
+#define iterv vector<lli>::iterator
+#define pi pair<lli,lli>
+#define vecpi vector<pi>
+#define iterpi vector<pi>::iterator
+#define Q queue
+#define PQ priority_queue
+#define mapc map<char,lli>
+#define itermc map<char,lli>::iterator 
+#define vecset vector<set<lli>>
+#define itervs vecset::iteratorlli 
+#define Forb(i,a,b) for(lli i=a;i>=b;i--)
+#include<tuple>
+#define tal tuple<lli,lli,lli>
 void BellmanFord(int graph[][3], int V, int E,
 				int src)
 {
