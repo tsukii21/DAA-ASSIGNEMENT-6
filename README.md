@@ -19,7 +19,7 @@ Given a graph and a source vertex in the graph, find shortest paths from source 
 
 ---
 ## How to use code
-After cloning, go to ass6 folder and compile and then run the cpp file.
+After cloning, go to assignment_06 folder and compile and then run the cpp file.
 ```
 #Download project
 git clone https://github.com/tsukii21/DAA-ASSIGNMENT-5.git
